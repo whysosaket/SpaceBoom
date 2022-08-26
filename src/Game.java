@@ -155,6 +155,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     }
 
     void defaultValues(){
+        this.setBackground(Color.black);
         health=200;
         pointX=720;
         prevDig=3;
