@@ -11,10 +11,10 @@ public class Main {
         frame.setResizable(false);
 
 
-        MainScreen mainScreen = new MainScreen();
+        Game game = new Game();
 
         //this.add(background);
-        frame.add(mainScreen);
+        frame.add(game);
         frame.setVisible(true);
     }
 

@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 import java.util.Random;
 
 
-public class MainScreen extends JPanel implements KeyListener, ActionListener {
+public class Game extends JPanel implements KeyListener, ActionListener {
 
     ImageIcon jetImage  = new ImageIcon("./Assets/Images/jet.png");
     JLabel jetLabel;
@@ -21,7 +21,7 @@ public class MainScreen extends JPanel implements KeyListener, ActionListener {
     private int points=0, health=200, speed=5, pointIncrement=1, jetSpeed=5,boost=0;
     boolean play=true;
 
-    MainScreen(){
+    Game(){
         this.setBackground(Color.black);
         this.setLayout(null);
         this.addKeyListener(this);
