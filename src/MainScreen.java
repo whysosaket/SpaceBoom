@@ -111,11 +111,16 @@ public class MainScreen extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i=0;i<backgroundArray.length;i++){
-            if(new Rectangle(jetLabel.getX(),jetLabel.getY(),33,33).intersects(new Rectangle(backgroundArray[i][0],backgroundArray[i][1],backgroundArray[i][2],backgroundArray[i][2])))
+            if(new Rectangle(jetLabel.getX(),jetLabel.getY(),35,35).intersects(new Rectangle(backgroundArray[i][0],backgroundArray[i][1],backgroundArray[i][2],backgroundArray[i][2])))
             {
                 if(health>0) {
                     backgroundArray[i][1]=random.nextInt(-500,-20);
                     health-=backgroundArray[i][2];
+                    if(health<=0){
+                        health=0;
+                        play=false;
+                        timer.stop();
+                    }
                 }
                 else {
                     health=0;
@@ -137,6 +142,14 @@ public class MainScreen extends JPanel implements KeyListener, ActionListener {
             speed+=2;
             jetSpeed+=2;
             pointIncrement*=5;
+            switch (prevDig){
+                case 4 -> this.setBackground(new Color(6,2,36));
+                case 5 -> this.setBackground(new Color(2,36,35));
+                case 6 -> this.setBackground(new Color(54,31,7));
+                case 7 -> this.setBackground(new Color(61,2,12));
+                case 8 -> this.setBackground(new Color(65,66,3));
+                default -> this.setBackground(Color.black);
+            }
         }
         repaint();
     }
