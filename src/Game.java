@@ -100,7 +100,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
 
         g2D.setPaint(Color.white);
-        g2D.setFont(new Font("Ink Free",Font.BOLD,30));
+        g2D.setFont(new Font(null,Font.BOLD,30));
         g2D.drawString(""+points,pointX,50);
 
         g2D.setPaint(Color.red);
