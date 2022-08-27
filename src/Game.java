@@ -62,10 +62,22 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     public void keyPressed(KeyEvent e) {
         if(play)
         switch (e.getKeyCode()){
-            case 37-> jetLabel.setLocation(jetLabel.getX()-jetSpeed-boost,jetLabel.getY());
-            case 39-> jetLabel.setLocation(jetLabel.getX()+jetSpeed+boost,jetLabel.getY());
-            case 40-> jetLabel.setLocation(jetLabel.getX(),jetLabel.getY()+jetSpeed+boost);
-            case 38-> jetLabel.setLocation(jetLabel.getX(),jetLabel.getY()-jetSpeed-boost);
+            case 37-> {
+                if(jetLabel.getX()>10)
+                jetLabel.setLocation(jetLabel.getX()-jetSpeed-boost,jetLabel.getY());
+            }
+            case 39-> {
+                if(jetLabel.getX()<740)
+                jetLabel.setLocation(jetLabel.getX()+jetSpeed+boost,jetLabel.getY());
+            }
+            case 40-> {
+                if(jetLabel.getY()<510)
+                jetLabel.setLocation(jetLabel.getX(),jetLabel.getY()+jetSpeed+boost);
+            }
+            case 38-> {
+                if (jetLabel.getY()>20)
+                jetLabel.setLocation(jetLabel.getX(),jetLabel.getY()-jetSpeed-boost);
+            }
             case 88-> boost = 10;
             }
         else if(e.getKeyCode()==32){
@@ -105,6 +117,17 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
         g2D.setPaint(Color.red);
         g2D.drawString(""+health,720,80);
+
+        //loosing case screen
+        if(play==false){
+            g2D.setPaint(Color.yellow);
+            g2D.drawString(""+points,360,300);
+            g2D.setPaint(Color.red);
+            g2D.setFont(new Font(null,Font.BOLD,50));
+            g2D.drawString("GAME OVER",250,250);
+            g2D.setPaint(Color.white);
+            g2D.drawString("PRESS SPACE TO RESTART",60,380);
+        }
 
     }
 
