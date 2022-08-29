@@ -11,7 +11,6 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
     ImageIcon jetImage  = new ImageIcon("./Assets/Images/jet.png");
     JLabel jetLabel;
-    JLabel lost;
     Random random;
 
     Timer timer;
@@ -120,8 +119,8 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
         //loosing case screen
         if(play==false){
-            g2D.setPaint(Color.yellow);
-            g2D.drawString(""+points,360,300);
+            //g2D.setPaint(Color.yellow);
+            //g2D.drawString(""+points,360,300);
             g2D.setPaint(Color.red);
             g2D.setFont(new Font(null,Font.BOLD,50));
             g2D.drawString("GAME OVER",250,250);
