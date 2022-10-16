@@ -8,7 +8,7 @@
 <br>
 
 <div align="center" style="text-align: center">
-    <h6>Running Harshit</h6>
+    <h6>Space Boom</h6>
     <img src="screenshots/1.png" width="600px"></img> 
 </div>
 
