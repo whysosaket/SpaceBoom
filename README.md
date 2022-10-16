@@ -9,7 +9,7 @@
 
 <div align="center" style="text-align: center">
     <h6>Running Harshit</h6>
-    <img src="screenshots/2.png" width="600px"</img> 
+    <img src="screenshots/1.png" width="600px"></img> 
 </div>
 
 <br>
