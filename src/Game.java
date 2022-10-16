@@ -17,7 +17,11 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
     int [][] backgroundArray = new int[9][3];
     int pointX=720,prevDig=3;
-    private int points=0, health=200, speed=5, pointIncrement=1, jetSpeed=5,boost=0;
+    private int points=0, health=200, speed=1, pointIncrement=1, jetSpeed=50,boost=0;
+
+    // The below vars are for smooth animation execution
+    private int positionX = 720, positionY = 500, animationSpeed = 1;
+    private boolean movingLEFT, movingRIGHT, movingUP, movingDOWN;
     boolean play=true;
 
     Game(){
@@ -27,7 +31,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         random = new Random();
 
         //timer
-        timer = new Timer(20, this);
+        timer = new Timer(10, this);
 
         //healthTimer
         Timer healthTimer = new Timer(1500, new ActionListener() {
@@ -61,23 +65,45 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     public void keyPressed(KeyEvent e) {
         if(play)
         switch (e.getKeyCode()){
+
+            // This is for LEFT key
             case 37-> {
-                if(jetLabel.getX()>10)
-                jetLabel.setLocation(jetLabel.getX()-jetSpeed-boost,jetLabel.getY());
+                if(jetLabel.getX()>10) {
+                    positionX = jetLabel.getX() - jetSpeed - boost;
+                    movingLEFT = true;
+                    //jetLabel.setLocation(jetLabel.getX() - jetSpeed - boost, jetLabel.getY());
+                }
             }
+
+            // This is for RIGHT key
             case 39-> {
-                if(jetLabel.getX()<740)
-                jetLabel.setLocation(jetLabel.getX()+jetSpeed+boost,jetLabel.getY());
+                if(jetLabel.getX()<740) {
+                    positionX = jetLabel.getX() + jetSpeed + boost;
+                    movingRIGHT = true;
+                    //jetLabel.setLocation(jetLabel.getX() + jetSpeed + boost, jetLabel.getY());
+                }
             }
+
+            // This is for DOWN key
             case 40-> {
-                if(jetLabel.getY()<510)
-                jetLabel.setLocation(jetLabel.getX(),jetLabel.getY()+jetSpeed+boost);
+                if(jetLabel.getY()<510) {
+                    positionY = jetLabel.getY() + jetSpeed +boost;
+                    movingDOWN=true;
+                    //jetLabel.setLocation(jetLabel.getX(), jetLabel.getY() + jetSpeed + boost);
+                }
             }
+
+            // This is for UP key
             case 38-> {
-                if (jetLabel.getY()>20)
-                jetLabel.setLocation(jetLabel.getX(),jetLabel.getY()-jetSpeed-boost);
+                if (jetLabel.getY()>20) {
+                    positionY = jetLabel.getY() - jetSpeed - boost;
+                    movingUP = true;
+                    //jetLabel.setLocation(jetLabel.getX(), jetLabel.getY() - jetSpeed - boost);
+                }
             }
-            case 88-> boost = 10;
+
+            // This is for X key
+            case 88-> boost = 15;
             }
         else if(e.getKeyCode()==32){
             play=true;
@@ -161,9 +187,9 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         if((int)Math.log10(points)+1>prevDig){
             prevDig =(int) Math.log10(points)+1;
             pointX -= 20;
-            speed+=2;
-            jetSpeed+=2;
-            pointIncrement*=5;
+            speed+=1;
+            jetSpeed+=5;
+            pointIncrement*=2;
             switch (prevDig){
                 case 4 -> this.setBackground(new Color(6,2,36));
                 case 5 -> this.setBackground(new Color(2,36,35));
@@ -173,18 +199,38 @@ public class Game extends JPanel implements KeyListener, ActionListener {
                 default -> this.setBackground(Color.black);
             }
         }
+        move();
         repaint();
+    }
+
+    void move(){
+        if(movingLEFT && jetLabel.getX() > positionX) {
+            jetLabel.setLocation(jetLabel.getX() - animationSpeed, jetLabel.getY());
+        }else movingLEFT = false;
+
+        if(movingRIGHT && jetLabel.getX() < positionX) {
+            jetLabel.setLocation(jetLabel.getX() + animationSpeed, jetLabel.getY());
+        }else movingRIGHT = false;
+
+        if(movingDOWN && jetLabel.getY()<positionY) {
+            jetLabel.setLocation(jetLabel.getX(), jetLabel.getY() + animationSpeed);
+        }else movingDOWN = false;
+
+        if(movingUP && jetLabel.getY()>positionY) {
+            jetLabel.setLocation(jetLabel.getX(), jetLabel.getY() - animationSpeed);
+        }else movingUP = false;
     }
 
     void defaultValues(){
         this.setBackground(Color.black);
+        movingUP = movingLEFT = movingDOWN = movingRIGHT = false;
         health=200;
         pointX=720;
         prevDig=3;
         points=0;
-        speed=5;
+        speed=3;
         pointIncrement=1;
-        jetSpeed=5;
+        jetSpeed=10;
         boost=0;
         jetLabel.setBounds(350,500,60,60);
         //Filling background array
