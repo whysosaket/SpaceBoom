@@ -1,4 +1,4 @@
-# Harshit-Run
+# Space-Boom
 -> A basic Java game made using Swing
 <br>
 -> This is an unlimited running game
